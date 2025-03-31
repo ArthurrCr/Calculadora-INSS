@@ -1,4 +1,3 @@
-```markdown
 # Calculadora de Redução de INSS em Obras
 
 Este projeto é uma aplicação web desenvolvida em Python/Flask para auxiliar na aferição e cálculo dos encargos do INSS em obras de construção civil, com base na Instrução Normativa RFB nº 971/2009. A aplicação permite ao usuário inserir dados da obra (área, CUB, notas fiscais, etc.), gerar diversas tabelas de cálculo (áreas, aferição indireta, tabela financeira e INSS detalhado) e visualizar os resultados, incluindo a economia gerada pela redução aplicada.
@@ -14,30 +13,6 @@ Este projeto é uma aplicação web desenvolvida em Python/Flask para auxiliar n
   - **Tabela Financeira:** Detalha os encargos mensais (valor atualizado, CPP, multa, juros de mora, MAED mínima, total, etc.) com base na SELIC.
   - **INSS Detalhado:** Mostra o INSS Devido, o INSS a Pagar, a Economia Gerada, os Honorários e a Economia Real.
 - **Integração com API do Banco Central:** Para a obtenção das taxas SELIC, utilizadas na atualização dos valores financeiros.
-
-## Estrutura do Projeto
-
-```
-Calculadora/
-├── app.py
-├── data/
-│   └── dados_percentuais.py
-├── static/
-│   ├── script.js
-│   └── styles.css
-├── templates/
-│   ├── index.html
-│   └── resultado.html
-└── utils/
-    ├── calculos.py
-    └── tabelas.py
-```
-
-- **app.py:** Arquivo principal da aplicação Flask.
-- **data/dados_percentuais.py:** Contém os dados de percentuais por UF e tipo de obra.
-- **static/**: Arquivos estáticos (CSS, JavaScript).
-- **templates/**: Templates HTML da aplicação.
-- **utils/**: Módulos Python com funções de cálculo e geração de tabelas.
 
 ## Instalação
 
@@ -112,4 +87,3 @@ Este projeto é licenciado sob a [MIT License](LICENSE).
 ---
 
 Sinta-se à vontade para contribuir, abrir issues ou sugerir melhorias!
-```
