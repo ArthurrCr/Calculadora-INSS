@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultado dos Cálculos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1>Resultado dos Cálculos</h1>
+
+    <h2>Valores</h2>
+    <div class="table-responsive">
+      {{ tabela_areas_html|safe }}
+    </div>
+
+    <h2>Aferição Indireta</h2>
+    <div class="table-responsive">
+      {{ tabela_afericao_html|safe }}
+    </div>
+
+    <h2>Tabela Financeira</h2>
+    <div class="table-responsive">
+      {{ tabela_financeira_html|safe }}
+    </div>
+    
+    <h2>INSS Detalhado</h2>
+    <div class="table-responsive">
+      {{ tabela_inss_html|safe }}
+    </div>
+
+    <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Voltar</a>
+  </div>
+</body>
+</html>

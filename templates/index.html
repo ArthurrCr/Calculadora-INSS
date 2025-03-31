@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Obra</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <!-- Bootstrap CSS para tooltips -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    /* Estilo customizado para o ícone de tooltip */
+    .tooltip-icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      border-radius: 50%;
+      background-color: #007bff;
+      color: #fff;
+      text-align: center;
+      cursor: pointer;
+      margin-left: 5px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .date-range {
+      margin-bottom: 20px;
+    }
+    .date-range label {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cadastro de Obra</h1>
+    <form id="obraForm" action="/submit" method="post">
+
+      <!-- Campos de Mês de Início e Mês de Término fora dos campos dinâmicos -->
+      <div class="date-range">
+        <label for="startDate">
+          Mês de Início da Obra:
+          <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                title="Selecione o mês/ano de início da execução da obra.">?</span>
+        </label>
+        <input type="month" id="startDate" name="startDate">
+
+        <label for="endDate">
+          Mês de Término da Obra:
+          <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                title="Selecione o mês/ano de término da execução da obra.">?</span>
+        </label>
+        <input type="month" id="endDate" name="endDate">
+      </div>
+
+      <div id="dynamicFields">
+        <div class="input-group">
+          <label for="identificacao">
+            Identificação:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Informe a identificação da área ou obra (ex.: número, nome ou código identificador).">?</span>
+          </label>
+          <input type="text" id="identificacao" name="identificacao[]">
+
+          <label for="categoria">
+            Categoria:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Selecione a categoria da obra: Obra Nova, Reforma ou Demolição.">?</span>
+          </label>
+          <select name="categoria[]">
+            <option value="Obra Nova">Obra Nova</option>
+            <option value="Reforma">Reforma</option>
+            <option value="Demolição">Demolição</option>
+          </select>
+
+          <label for="material">
+            Material:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Selecione o material predominante da obra: Alvenaria, Madeira ou Mista.">?</span>
+          </label>
+          <select name="material[]">
+            <option value="Alvenaria">Alvenaria</option>
+            <option value="Madeira">Madeira</option>
+            <option value="Mista">Mista</option>
+          </select>
+
+          <label for="tipoArea">
+            Tipo de Área:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Indique se a área é Principal ou Complementar.">?</span>
+          </label>
+          <select name="tipoArea[]">
+            <option value="Principal">Principal</option>
+            <option value="Complementar">Complementar</option>
+          </select>
+
+          <label for="areaTotal">
+            Área Total (m²):
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Informe a área total bruta da obra em metros quadrados.">?</span>
+          </label>
+          <input type="number" id="areaTotal" name="areaTotal[]" step="any">
+
+          <label for="CUB">
+            Valor do CUB:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Informe o valor do CUB (Custo Unitário Básico) da obra.">?</span>
+          </label>
+          <input type="number" id="CUB" name="CUB[]" step="any">
+
+          <label for="uf">
+            UF:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Selecione a Unidade Federativa onde a obra está localizada.">?</span>
+          </label>
+          <select name="uf[]">
+            {% for uf in ufs %}
+            <option value="{{ uf }}">{{ uf }}</option>
+            {% endfor %}
+          </select>
+
+          <label for="concretoUsinado">
+            Concreto Usinado:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Selecione se a obra utiliza concreto usinado.">?</span>
+          </label>
+          <select name="concretoUsinado[]">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+
+          <label for="destinacao">
+            Destinação:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Selecione a destinação da obra: Residencial Unifamiliar, Comercial, Galpão Industrial etc.">?</span>
+          </label>
+          <select name="destinacao[]">
+            <option value="Residencial Unifamiliar">Residencial Unifamiliar</option>
+            <option value="Residencial Multifamiliar">Residencial Multifamiliar</option>
+            <option value="Comercial Salas e Lojas">Comercial Salas e Lojas</option>
+            <option value="Edifício de Garagens">Edifício de Garagens</option>
+            <option value="Galpão Industrial">Galpão Industrial</option>
+            <option value="Casa Popular">Casa Popular</option>
+            <option value="Conjunto Habitacional Popular">Conjunto Habitacional Popular</option>
+          </select>
+
+          <label for="valorNotasFiscais">
+            Valor Notas Fiscais:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Informe o valor total das notas fiscais associadas à obra.">?</span>
+          </label>
+          <input type="number" id="valorNotasFiscais" name="valorNotasFiscais[]" step="any">
+
+          <label for="areaAferida">
+            Área Total Aferida:
+            <span class="tooltip-icon" data-toggle="tooltip" data-placement="right" 
+                  title="Área efetivamente medida para os cálculos, podendo diferir da área bruta por ajustes e abatimentos.">?</span>
+          </label>
+          <input type="number" id="areaAferida" name="areaAferida[]" step="any">
+        </div>
+      </div>
+
+      <button type="button" class="add-button" onclick="addFields()">Adicionar Mais Campos</button>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+  
+  <script src="/static/script.js"></script>
+  <!-- jQuery e Bootstrap JS para funcionamento dos tooltips -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+</body>
+</html>
